@@ -1,0 +1,43 @@
+﻿@model List<AteshgahApp.UI.Models.InvoiceViewModel>
+@{
+    var count = 0;
+}
+@if (TempData["estimateError"] == null)
+{
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Invoice №</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                count++;
+
+                <tr>
+                    <th scope="row">@count</th>
+                    <td>
+                        @item.InvoiceNr
+                    </td>
+                    <td>@item.DueDate</td>
+                    <td>@item.Amount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <input type="text" disabled value="@Model.Sum(m=>m.Amount)" />
+
+    <button type="button" class="btn btn-primary" id="invoice-data">Create</button>
+}
+else
+{
+    <span class="danger text-danger">@ViewData["estimateError"]</span>
+}
+
+
+

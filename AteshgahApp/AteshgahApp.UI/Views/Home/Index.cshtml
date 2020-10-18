@@ -1,0 +1,47 @@
+﻿@model List<AteshgahApp.UI.Models.LoanViewModel>
+@{
+    ViewBag.Title = "Loans";
+}
+
+<div class="row">
+    <div class="col-md-12" style="margin-top:20px;">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Client Id</th>
+                    <th scope="col">Client Infos</th>
+                    <th scope="col">Loan Amount</th>
+                    <th scope="col">Payout Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@item.ClientId</th>
+                        <td>
+                            <a href="/home/LoanDetails/@item.Id">@item.Client.Name @item.Client.Surname</a>
+                        </td>
+                        <td>@item.Amount</td>
+                        <td>@item.PayoutDate</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6" style="">
+        <button id="calculation" type="button" class="btn btn-success">Add</button>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+        $(document).ready(function ()
+        {
+            $("#calculation").click(function ()
+            {
+                document.location.href = "/Home/Create";
+            })
+        });
+    </script>
+}

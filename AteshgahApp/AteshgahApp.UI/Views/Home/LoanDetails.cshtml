@@ -1,0 +1,90 @@
+﻿@model AteshgahApp.UI.Models.LoanDetailsViewModel
+@{
+    var count = 0;
+}
+<div class="row">
+    <div class="col-md-5 margin-bottom-15">
+        <form class="form-horizontal">
+            <div class="form-group" style="margin-top:20px;">
+                <label for="inputClient" class="col-md-2 control-label">Client</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="inputClient" disabled>
+                        <option> @Model.Client.Name @Model.Client.Surname</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPhone" class="col-md-2 control-label">Telephone number</label>
+                <div class="col-sm-10">
+                    <input type="tel" class="form-control" id="inputPhone" disabled value="@Model.Client.TelephoneNr" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputLoanAmount" class="col-md-2 control-label">Loan Amount</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputLoanAmount" disabled value="@Model.Amount">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputLoanPeriod" class="col-md-2 control-label">Loan Periods</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="inputLoanPeriod" disabled>
+                        <option>@Model.LoanPeriod</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputMonthlyRate" class="col-sm-2 control-label">Monthly interest rate</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputMonthlyRate" value="@Model.InterestRate" disabled name="monthlyRate">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputpayoutDate" class="col-sm-2 control-label">Payout date</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" id="inputpayoutDate" disabled value="@Model.PayoutDate" name="payoutDate">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6 col-md-offset-1" style="margin-top:20px;">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">№</th>
+                    <th scope="col">Invoice №</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Invoices)
+                {
+                    count++;
+
+                    <tr>
+                        <th scope="row">@count</th>
+                        <td>
+                            @item.InvoiceNr
+                        </td>
+                        <td>@item.DueDate</td>
+                        <td>@item.Amount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<button style="margin-top:10px;" id="back" type="button" class="btn btn-primary w-49">Back</button>
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#back").click(function () {
+                document.location.href = "/Home/Index";
+            })
+        });
+    </script>
+}
